@@ -32,7 +32,7 @@ DATA_BACKEND = 'datastore'
 
 # Google Cloud Project ID. This can be found on the 'Overview' page at
 # https://console.developers.google.com
-PROJECT_ID = 'your-project-id'
+PROJECT_ID = 'ithiago-bookshelf'
 
 # Cloud Datastore dataset id, this is the same as your project id.
 DATASTORE_DATASET_ID = PROJECT_ID
@@ -93,7 +93,7 @@ MONGO_URI = 'mongodb://user:password@host:27017/database'
 #
 # You can adjust the max content length and allow extensions settings to allow
 # larger or more varied file types if desired.
-CLOUD_STORAGE_BUCKET = 'your-bucket-name'
+CLOUD_STORAGE_BUCKET = 'ithiago-bookshelf-bucket'
 MAX_CONTENT_LENGTH = 8 * 1024 * 1024
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
@@ -109,5 +109,5 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 # If you receive a invalid redirect URI error review you settings to ensure
 # that the current URI is allowed.
 GOOGLE_OAUTH2_CLIENT_ID = \
-    'your-client-id'
-GOOGLE_OAUTH2_CLIENT_SECRET = 'your-client-secret'
+    '992000936368-jjor4lr93q5t1a2r22mpeno056n8q6h3.apps.googleusercontent.com'
+GOOGLE_OAUTH2_CLIENT_SECRET = 'laFV90VAg2F03EK5xBzoTTDA'
