@@ -1,0 +1,1 @@
+export GOOGLE_APPLICATION_CREDENTIALS='/home/tfonseca/dev/keys/notes-python-gcp-068767da3da1.json' && python main.py
