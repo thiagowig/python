@@ -57,8 +57,7 @@ def update_noteType(noteType_id):
 
 @crud.route('/v1.0/noteTypes/<int:noteType_id>', methods=['DELETE'])
 def detele_noteType(noteType_id):
-    noteType = get_note_type(noteType_id)
-    noteTypes.remove(noteType[0])
+    get_model().delete(noteType_id)
 
     return jsonify({'result': True})
 
