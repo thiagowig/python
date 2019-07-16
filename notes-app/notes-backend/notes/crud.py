@@ -1,22 +1,10 @@
 from notes import get_model
 from flask import Blueprint, jsonify, abort, make_response, request
 
-crud = Blueprint('crud', __name__)
+import logging
+from logging.handlers import RotatingFileHandler
 
-noteTypes = [
-    {
-        'id': 1,
-        'name': 'Cloud'
-    },
-    {
-        'id': 2,
-        'name': 'Frontend'
-    },
-    {
-        'id': 3,
-        'name': 'Backend'
-    }
-]
+crud = Blueprint('crud', __name__)
 
 @crud.route('/v1.0/noteTypes')
 def list():
@@ -45,14 +33,15 @@ def create_noteType():
 
 @crud.route('/v1.0/noteTypes/<int:noteType_id>', methods=['PUT'])
 def update_noteType(noteType_id):
-    noteType = get_note_type(noteType_id)
-
     if not request.json or not 'name' in request.json:
         abort(400)
 
-    noteType[0]['name'] = request.json.get('name', noteType[0]['name'])
+    noteType = get_model().read(noteType_id)
+    data = request.json
 
-    return jsonify({'noteType': noteType[0]})
+    noteType = get_model().update(data, noteType_id)
+
+    return jsonify({'noteType': noteType})
 
 
 @crud.route('/v1.0/noteTypes/<int:noteType_id>', methods=['DELETE'])
