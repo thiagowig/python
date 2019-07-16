@@ -35,6 +35,20 @@ def list(limit=20, cursor=None):
     return entities
 
 
+def read(id):
+    ds = get_client()
+    key = ds.key('NoteType', int(id))
+    results = ds.get(key)
+
+    return from_datastore(results)
+
+
+def delete(id):
+    ds = get_client()
+    key = ds.key('NoteType', int(id))
+    ds.delete(key)
+
+
 def update(data, id=None):
     ds = get_client()
 

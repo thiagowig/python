@@ -27,9 +27,9 @@ def list():
 
 @crud.route('/v1.0/noteTypes/<int:noteType_id>', methods=['GET'])
 def get_noteType(noteType_id):
-    noteType = get_note_type(noteType_id)    
+    noteType = get_model().read(noteType_id)    
     
-    return jsonify({'noteType': noteType[0]})
+    return jsonify({'noteType': noteType})
 
 
 @crud.route('/v1.0/noteTypes', methods=['POST'])
