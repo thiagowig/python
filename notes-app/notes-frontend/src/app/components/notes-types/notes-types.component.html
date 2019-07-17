@@ -1,1 +1,21 @@
-<p>notes-types works!</p>
+<h1>Notes Type</h1>
+
+<form [formGroup]="notesTypeForm" (ngSubmit)="onSubmit()">
+    <h5 *ngIf="success">Your form is valid!</h5>
+
+    <label>
+        Name:
+        <input type="text" formControlName="name">
+        <div *ngIf="submitted && notesTypeForm.controls.name.errors" class="error">
+            <div *ngIf="notesTypeForm.controls.name.errors.required">The name is required</div>
+        </div>
+    </label>
+
+    <input type="submit" value="Send message" class="cta">
+
+</form>
+
+<div *ngIf="submitted" class="results">
+    <strong>Name:</strong>
+    <span>{{ notesTypeForm.controls.name.value }}</span>
+</div>
