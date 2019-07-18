@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { ApiService } from '../../services/api.service';
-
+import { NoteType } from '../../classes/note-type';
 
 
 @Component({
@@ -15,6 +15,12 @@ export class NotesTypesComponent implements OnInit {
   submitted = false;
   success: boolean = false;
 
+  displayedColumns: string[] = ['id', 'name'];
+  noteTypes: NoteType[];
+  isLoadingResults = false;
+
+
+
   constructor(
     private formBuilder: FormBuilder,
     private apiService: ApiService
@@ -23,6 +29,21 @@ export class NotesTypesComponent implements OnInit {
   ngOnInit() {
     this.notesTypeForm = this.formBuilder.group({
       name: ['', Validators.required]
+    });
+
+    this.listAll();
+  }
+
+  listAll() {
+    this.isLoadingResults = true;
+
+    this.apiService.getNotesTypes().subscribe(data => {
+      this.noteTypes = data.noteTypes;
+      console.log(this.noteTypes);
+      this.isLoadingResults = false;
+    }, err => {
+      console.log(err);
+      this.isLoadingResults = false;
     });
   }
 

@@ -1,6 +1,6 @@
 <h1>Notes Type</h1>
 
-<form [formGroup]="notesTypeForm" (ngSubmit)="onSubmit()">
+<!--form [formGroup]="notesTypeForm" (ngSubmit)="onSubmit()">
     <h5 *ngIf="success">Your form is valid!</h5>
 
     <label>
@@ -18,4 +18,26 @@
 <div *ngIf="submitted" class="results">
     <strong>Name:</strong>
     <span>{{ notesTypeForm.controls.name.value }}</span>
-</div>
+</div-->
+
+
+
+
+
+<div class="col-md-6 user-container">
+    <h2 style="margin: auto">Notes Types</h2>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let noteType of noteTypes">
+        <td>{{noteType.id}}</td>
+        <td>{{noteType.name}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
