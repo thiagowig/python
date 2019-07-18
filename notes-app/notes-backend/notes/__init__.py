@@ -1,9 +1,11 @@
 import logging
 
 from flask import current_app, Flask, redirect, url_for
+from flask_cors import CORS
 
 def create_app(config, debug=False, testing=False, config_overrides=None):
     app = Flask(__name__)
+    CORS(app)
     app.config.from_object(config)
 
     app.debug = debug
