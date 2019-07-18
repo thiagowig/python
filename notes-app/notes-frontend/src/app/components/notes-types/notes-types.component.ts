@@ -13,13 +13,9 @@ export class NotesTypesComponent implements OnInit {
 
   notesTypeForm: FormGroup;
   submitted = false;
-  success: boolean = false;
 
-  displayedColumns: string[] = ['id', 'name'];
   noteTypes: NoteType[];
-  isLoadingResults = false;
-
-
+  noteType: NoteType = new NoteType();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,23 +24,25 @@ export class NotesTypesComponent implements OnInit {
 
   ngOnInit() {
     this.notesTypeForm = this.formBuilder.group({
-      name: ['', Validators.required]
+      name: ['', Validators.required],
+      id: ['']
     });
 
     this.listAll();
   }
 
   listAll() {
-    this.isLoadingResults = true;
-
     this.apiService.getNotesTypes().subscribe(data => {
       this.noteTypes = data.noteTypes;
       console.log(this.noteTypes);
-      this.isLoadingResults = false;
     }, err => {
       console.log(err);
-      this.isLoadingResults = false;
     });
+  }
+
+  update(noteType: NoteType) {
+    this.notesTypeForm.get("name").setValue(noteType.name);
+    this.notesTypeForm.get("id").setValue(noteType.id);
   }
 
   onSubmit() {
@@ -57,8 +55,6 @@ export class NotesTypesComponent implements OnInit {
     this.apiService.getNotesTypes().subscribe((res) => {
       console.log(res);
     });
-
-    this.success = true;
   }
 
 }
