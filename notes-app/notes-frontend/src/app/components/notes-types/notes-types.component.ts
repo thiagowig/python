@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { ApiService } from '../../services/api.service';
+
+
 
 @Component({
   selector: 'app-notes-types',
@@ -12,7 +15,10 @@ export class NotesTypesComponent implements OnInit {
   submitted = false;
   success: boolean = false;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private apiService: ApiService
+  ) { }
 
   ngOnInit() {
     this.notesTypeForm = this.formBuilder.group({
@@ -26,6 +32,10 @@ export class NotesTypesComponent implements OnInit {
     if (this.notesTypeForm.invalid) {
         return;
     }
+
+    this.apiService.getNotesTypes().subscribe((res) => {
+      console.log(res);
+    });
 
     this.success = true;
   }
