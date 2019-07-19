@@ -1,10 +1,10 @@
 <h1>Notes Types</h1>
 
-<form [formGroup]="notesTypeForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="notesTypeForm" (ngSubmit)="saveNoteType()">
 
   <label>
     Id:
-    <input type="number" formControlName="id" disabled="disabled">
+    <input type="text" formControlName="id" [readonly]="true">
   </label>
 
   <label>
@@ -15,7 +15,7 @@
     </div>
   </label>
 
-  <input type="submit" value="New">
+  <button type="button" (click)="newNoteType()">New</button>
   <input type="submit" value="Save">
 </form>
 
@@ -27,13 +27,15 @@
         <th>Id</th>
         <th>Name</th>
         <th>Edit</th>
+        <th>Delete</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let noteType of noteTypes">
         <td>{{noteType.id}}</td>
         <td>{{noteType.name}}</td>
-        <td><input type="submit" (click)="update(noteType)"></td>
+        <td><input value="Update" type="submit" (click)="update(noteType)"></td>
+        <td><input value="Delete" type="submit" (click)="delete(noteType)"></td>
       </tr>
     </tbody>
   </table>
