@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { NoteType } from '../../classes/note-type';
 
@@ -15,6 +15,7 @@ export class NotesTypesComponent implements OnInit {
   submitted = false;
 
   noteTypes: NoteType[];
+  displayedColumns: string[] = ['id', 'name', 'update', 'delete'];
   noteType: NoteType = new NoteType();
 
   constructor(
@@ -48,8 +49,8 @@ export class NotesTypesComponent implements OnInit {
   }
 
   update(noteType: NoteType) {
-    this.notesTypeForm.get("name").setValue(noteType.name);
-    this.notesTypeForm.get("id").setValue(noteType.id);
+    this.notesTypeForm.get('name').setValue(noteType.name);
+    this.notesTypeForm.get('id').setValue(noteType.id);
   }
 
   delete(noteType: NoteType) {
@@ -61,18 +62,19 @@ export class NotesTypesComponent implements OnInit {
     }, err => {
       console.log(err);
     });
+
   }
 
   saveNoteType() {
     this.submitted = true;
 
     if (this.notesTypeForm.invalid) {
-        return;
+      return;
     }
 
     this.apiService.saveNoteType(this.notesTypeForm.value).subscribe((res) => {
-      this.notesTypeForm.get("name").setValue(res.noteType.name);
-      this.notesTypeForm.get("id").setValue(res.noteType.id);
+      this.notesTypeForm.get('name').setValue(res.noteType.name);
+      this.notesTypeForm.get('id').setValue(res.noteType.id);
 
       var elementIndex = this.noteTypes.indexOf(this.notesTypeForm.value);
       this.noteTypes.splice(elementIndex, 1);

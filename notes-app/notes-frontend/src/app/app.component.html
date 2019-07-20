@@ -1,11 +1,11 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-</div>
+<mat-toolbar color="primary">
+    <mat-toolbar-row>{{ title }}</mat-toolbar-row>
+    <mat-toolbar-row>
+      <button mat-raised-button color="accent" routerLink="/notes">Notes</button>
+      <button mat-raised-button color="accent" routerLink="/types">Types</button>
+      <span></span>
+    </mat-toolbar-row>
+  </mat-toolbar>
 
-<a routerLink="/notes">Notes</a>
-<a routerLink="/types">Types</a>
 
 <router-outlet></router-outlet>
