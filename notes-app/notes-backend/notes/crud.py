@@ -1,7 +1,8 @@
 from notes import get_model
-from flask import Blueprint, jsonify, abort, make_response, request
+from flask import Blueprint, jsonify, abort, make_response, request, current_app
 
 import logging
+import requests
 from logging.handlers import RotatingFileHandler
 
 crud = Blueprint('crud', __name__)
@@ -15,7 +16,14 @@ def list():
 
 @crud.route('/v1.0/noteTypes/<int:noteType_id>', methods=['GET'])
 def get_noteType(noteType_id):
-    noteType = get_model().read(noteType_id)    
+    noteType = get_model().read(noteType_id)
+
+    url = current_app.config['FUNCTION_URL']
+    payload = {"message": "noteType.name"}
+    headers = {'Content-type': 'application/json'}
+    r = requests.post(url, data=payload, headers=headers)
+    current_app.logger.info('SERÁ QUE FOI. STATUS: %s', r.status_code)
+    current_app.logger.info('SERÁ QUE FOI. TEXT: %s', r.text)
     
     return jsonify({'noteType': noteType})
 
