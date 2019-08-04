@@ -1,85 +1,87 @@
-from datetime import datetime
 from flask import make_response, abort
-
-def get_timestamp():
-    return datetime.now().strftime(('%Y-%m-%d %H:%M:%S'))
-
-
-PEOPLE = {
-    'Farrell': {
-        'fname': 'Doug',
-        'lname': 'Farrell',
-        'timestamp': get_timestamp()
-    },
-    'Brockman': {
-        'fname': 'Kent',
-        'lname': 'Brockman',
-        'timestamp': get_timestamp()
-    },
-    'Easter': {
-        'fname': 'Bunny',
-        'lname': 'Easter',
-        'timestamp': get_timestamp()
-    }
-}
+from config import db
+from models import Person, PersonSchema, Note
 
 
 def read_all():
-    return [PEOPLE[key] for key  in sorted(PEOPLE.keys())]
+    people = Person.query.order_by(Person.lname).all()
+
+    person_schema = PersonSchema(many=True)
+    data = person_schema.dump(people).data
+    return data
 
 
-def read_one(lname):
-    if lname in PEOPLE:
-        person = PEOPLE.get(lname)
+def read_one(person_id):
+    person = (
+        Person.query.filter(Person.person_id == person_id)
+        .outerjoin(Note)
+        .one_or_none()
+    )
+
+    if person is not None:
+        person_schema = PersonSchema()
+        data = person_schema.dump(person).data
+        return data
+
     else:
-        abort(404, 'Person with las name {lname} not found'.format(lname=lname))
-
-    return person
+        abort(404, "Person not found")
 
 
 def create(person):
-    lname = person.get('lname', None)
-    fname = person.get('fname', None)
+    fname = person.get("fname")
+    lname = person.get("lname")
 
-    if lname not in PEOPLE and lname is not None:
-        PEOPLE[lname] = {
-            'lname': lname,
-            'fname': fname,
-            'timestamp': get_timestamp(),
-        }
+    existing_person = (
+        Person.query.filter(Person.fname == fname)
+        .filter(Person.lname == lname)
+        .one_or_none()
+    )
 
-        return make_response(
-            '{lname} successfully created'.format(lname=lname), 201
-        )
+    if existing_person is None:
+        schema = PersonSchema()
+        new_person = schema.load(person, session=db.session).data
+
+        db.session.add(new_person)
+        db.session.commit()
+
+        data = schema.dump(new_person).data
+
+        return data, 201
 
     else:
-        abort(
-            406,
-            'Person with last name {lname} already exists'.format(lname=lname),
-        )
+        abort(409, "Person exists already")
 
 
-def update(lname, person):
-    if lname in PEOPLE:
-        PEOPLE[lname]['fname'] = person.get('fname')
-        PEOPLE[lname]['timestamp'] = get_timestamp()
+def update(person_id, person):
+    update_person = Person.query.filter(
+        Person.person_id == person_id
+    ).one_or_none()
 
-        return PEOPLE[lname]
-        
+    if update_person is not None:
+
+        schema = PersonSchema()
+        update = schema.load(person, session=db.session).data
+
+        update.person_id = update_person.person_id
+
+        db.session.merge(update)
+        db.session.commit()
+
+        data = schema.dump(update_person).data
+
+        return data, 200
+
     else:
-        abort(
-            404, 'Person with last name {lname} not found'.format(lname=lname)
-        )
+        abort(404, "Person not found")
 
 
-def delete(lname):
-    if lname in PEOPLE:
-        del PEOPLE[lname]
-        return make_response(
-            '{lname} successfully deleted'.format(lname=lname), 200
-        )
-        
+def delete(person_id):
+    person = Person.query.filter(Person.person_id == person_id).one_or_none()
+
+    if person is not None:
+        db.session.delete(person)
+        db.session.commit()
+        return make_response("Person deleted", 200)
+
     else:
-        abort(
-            404, 'Person with last name {lname} not found'.format(lname=lname)
-        )
+        abort(404, "Person not found")
