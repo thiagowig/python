@@ -2,6 +2,7 @@ import logging
 
 from flask import current_app, Flask, redirect, url_for
 from flask_cors import CORS
+import os
 
 def create_app(config, debug=False, testing=False, config_overrides=None):
     app = Flask(__name__)
@@ -23,7 +24,11 @@ def create_app(config, debug=False, testing=False, config_overrides=None):
         model.init_app(app)
 
     from .crud import crud
-    app.register_blueprint(crud, url_prefix='/api')    
+    app.register_blueprint(crud, url_prefix='/api')   
+
+    app.config['PUBSUB_VERIFICATION_TOKEN'] = os.environ['PUBSUB_VERIFICATION_TOKEN']
+    app.config['PUBSUB_TOPIC'] = os.environ['PUBSUB_TOPIC']
+    app.config['PROJECT'] = os.environ['GOOGLE_CLOUD_PROJECT']
 
     return app
 
