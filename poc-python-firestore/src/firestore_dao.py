@@ -13,7 +13,7 @@ db = firestore.Client()
 class FireStoreDao():    
 
     def list_all():
-        users_ref = db.collection(u'users')
+        users_ref = db.collection(u'users').order_by(u'first')
         docs = users_ref.stream()
 
         return jsonify({'clients': from_firestore(docs)})
