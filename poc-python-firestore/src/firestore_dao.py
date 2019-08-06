@@ -1,6 +1,9 @@
 # Examples
 # https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/firestore/cloud-client/snippets.py
 
+# Concepts
+# https://cloud.google.com/firestore/docs/concepts
+
 from google.cloud import firestore
 from flask import jsonify
 from .client import Client
