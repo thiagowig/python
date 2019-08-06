@@ -15,23 +15,17 @@ def list_one(client_id):
 
 @crud.route('/clients', methods=['POST'])
 def create():
-    print('Create')
+    client = request.json
+    return DataBase.create(client)
 
 
 @crud.route('/clients/<client_id>', methods=['PUT'])
 def update(client_id):
-    print('Update')
+    client = request.json
+    return DataBase.update(client_id, client)
 
 
 @crud.route('/clients/<client_id>', methods=['DELETE'])
 def delete(client_id):
-    print('Delete')
+    return DataBase.delete(client_id)
 
-
-def create_client(document, first_name, last_name):
-    doc_ref = db.collection(u'users').document(document)
-    doc_ref.set({
-        u'first': first_name,
-        u'last': last_name
-    })
-    
