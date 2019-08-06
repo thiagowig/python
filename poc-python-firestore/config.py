@@ -1,0 +1,1 @@
+PROJECT_ID = 'poc-python-firestore'
