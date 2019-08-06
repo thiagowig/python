@@ -29,3 +29,8 @@ def update(client_id):
 def delete(client_id):
     return DataBase.delete(client_id)
 
+
+@crud.route('/clients/retired', methods=['GET'])
+def retired():
+    retired_age = 65
+    return DataBase.find_by_age_greater_than(retired_age)

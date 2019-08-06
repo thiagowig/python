@@ -20,3 +20,7 @@ class DataBase():
 
     def delete(client_id):
         return store.delete(client_id)
+
+
+    def find_by_age_greater_than(age):
+        return store.find_by_age_greater_than(age)

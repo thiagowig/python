@@ -1,3 +1,6 @@
+# Examples
+# https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/firestore/cloud-client/snippets.py
+
 from google.cloud import firestore
 from flask import jsonify
 from .client import Client
@@ -43,6 +46,13 @@ class FireStoreDao():
         users_ref.document(client_id).delete()
 
         return jsonify({'message': 'The client was deleted'})
+
+    def find_by_age_greater_than(age):
+        users_ref = db.collection(u'users')
+        query = users_ref.where(u'age', u'>=', 50).where(u'age', u'<=', 67)
+        docs = query.stream()
+
+        return jsonify({'clients': from_firestore(docs)})
 
 
 def from_firestore(docs):
