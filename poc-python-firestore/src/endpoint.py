@@ -49,6 +49,13 @@ def retired():
     return create_response(response_data)
 
 
+@endpoint.route('/clear')
+def clear():
+    response_data = use_case.clear()
+
+    return create_response(response_data)
+
+
 def create_response(data, status = 200):
     data  = json.dumps(data)
     return Response(response=data, status=status, mimetype="application/json")

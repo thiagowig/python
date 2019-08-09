@@ -22,5 +22,9 @@ class UserUseCase():
         return gateway.delete(client_id)
 
 
+    def clear():
+        return gateway.clear()
+
+
     def find_by_age_greater_than(age):
         return gateway.find_by_age_greater_than(age)

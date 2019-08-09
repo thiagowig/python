@@ -1,0 +1,106 @@
+{
+	"variables": [],
+	"info": {
+		"name": "CRUD Operations",
+		"_postman_id": "28926b41-4bbb-d655-973b-a51ee7648e03",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ListAll",
+			"request": {
+				"url": "{{protocol}}://{{server}}/api/clients",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "List by Id",
+			"request": {
+				"url": "{{protocol}}://{{server}}/api/clients/C356SSacKYgbxkAI2UmZ",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Save",
+			"request": {
+				"url": "{{protocol}}://{{server}}/api/clients",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"first_name\": \"Thiago\",\n\t\"last_name\": \"Fonseca\",\n\t\"age\": 30\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"url": "{{protocol}}://{{server}}/api/clients/HVAEiPZnTF7Fu8VMru1r",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"preferences\": [\n\t\t\"typescript\",\n\t\t\"angular\"\n\t]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"url": "{{protocol}}://{{server}}/api/clients/qFo8j7FQLRIJBx4XNd1S",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Simple Filter",
+			"request": {
+				"url": "{{protocol}}://{{server}}/api/clients/retired",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Clear",
+			"request": {
+				"url": "{{protocol}}://{{server}}/api/clear",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
