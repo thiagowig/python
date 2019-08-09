@@ -1,30 +1,25 @@
-# Examples
-# https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/firestore/cloud-client/snippets.py
 
-# Concepts
-# https://cloud.google.com/firestore/docs/concepts
 
 from google.cloud import firestore
-from flask import jsonify
 from .client import Client
+from dataclasses import dataclass
 
 db = firestore.Client()
 
-class FireStoreDao():    
+class UserGateway():          
 
     def list_all():
-        users_ref = db.collection(u'users').order_by(u'first')
+        users_ref = db.collection(u'users')
         docs = users_ref.stream()
 
-        return jsonify({'clients': from_firestore(docs)})
+        return UserGateway.convert_array_to_dict(docs)
 
 
     def list_one(client_id):
         users_ref = db.collection(u'users')
         doc = users_ref.document(client_id).get()
-        client = Client.from_dict(doc.to_dict())
 
-        return client.to_json()
+        return UserGateway.convert_object_to_dict(doc)
 
 
     def create(client):
@@ -32,32 +27,50 @@ class FireStoreDao():
         doc_ref.set(client)
         doc = doc_ref.get()
 
-        client = Client.from_dict(doc.to_dict())
+        response = {
+            "message": "The client was created",
+            "id": doc.id
+        }
 
-        return client.to_json()
+        return response
 
 
     def update(client_id, client):
         users_ref = db.collection(u'users').document(client_id)
         users_ref.update(client)
 
-        return jsonify({'message': 'The client was updated'})
+        return {'message': 'The client was updated'}
 
 
     def delete(client_id):
         users_ref = db.collection(u'users')
         users_ref.document(client_id).delete()
 
-        return jsonify({'message': 'The client was deleted'})
+        return {'message': 'The client was deleted'}
+
 
     def find_by_age_greater_than(age):
         users_ref = db.collection(u'users')
         query = users_ref.where(u'age', u'>=', 50).where(u'age', u'<=', 67)
         docs = query.stream()
 
-        return jsonify({'clients': from_firestore(docs)})
+        return {'clients': UserGateway.convert_array_to_dict(docs)}
 
 
-def from_firestore(docs):
-    my_dict = { doc.id: doc.to_dict() for doc in docs }
-    return my_dict
+    def convert_array_to_dict(docs):
+        array = []
+
+        for doc in docs:
+            array.append(UserGateway.convert_object_to_dict(doc))
+
+        return array
+
+
+    def convert_object_to_dict(doc):
+        fields = doc.to_dict()
+        fields["id"] = doc.id
+
+        return fields
+
+
+    

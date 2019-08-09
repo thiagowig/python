@@ -17,12 +17,16 @@ class Client():
         return client
 
 
-    def to_dict(self):
+    @staticmethod
+    def to_dict(id, source):
         dest = {
-            u'first': self.first,
-            u'last': self.last,
-            u'age': self.age
+            u'id': id,
+            u'first': source.first,
+            u'last': source.last,
+            u'age': source.age
         }
+
+        return dest
 
 
     def to_json(self):
