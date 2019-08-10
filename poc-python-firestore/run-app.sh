@@ -1,1 +1,1 @@
-export GOOGLE_APPLICATION_CREDENTIALS='/home/tfonseca/dev/keys/poc-python-firestore-5a4d77c48e6a.json' && pipenv run python3.7 main.py
+export GOOGLE_APPLICATION_CREDENTIALS='/home/thiago/dev/keys/poc-python-firestore-d26ec85589fd.json' && pipenv run python3 main.py
