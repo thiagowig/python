@@ -1,106 +1,112 @@
 {
-	"variables": [],
 	"info": {
+		"_postman_id": "9931ddb1-903b-4a74-8133-19904e0de870",
 		"name": "Endpoint Operations",
-		"_postman_id": "28926b41-4bbb-d655-973b-a51ee7648e03",
-		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "ListAll",
 			"request": {
-				"url": "{{protocol}}://{{server}}/api/clients",
 				"method": "GET",
 				"header": [],
-				"body": {},
-				"description": ""
+				"url": "{{protocol}}://{{server}}/api/users"
 			},
 			"response": []
 		},
 		{
 			"name": "List by Id",
 			"request": {
-				"url": "{{protocol}}://{{server}}/api/clients/C356SSacKYgbxkAI2UmZ",
 				"method": "GET",
 				"header": [],
-				"body": {},
-				"description": ""
+				"url": "{{protocol}}://{{server}}/api/users/WfxHgyWEb4wEvtYqd4VF"
 			},
 			"response": []
 		},
 		{
 			"name": "Save",
 			"request": {
-				"url": "{{protocol}}://{{server}}/api/clients",
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
+						"value": "application/json"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"first_name\": \"Thiago\",\n\t\"last_name\": \"Fonseca\",\n\t\"age\": 30\n}"
+					"raw": "{\n\t\"first_name\": \"Anderson\",\n\t\"last_name\": \"Silva\",\n\t\"workouts\": [\n\t\t{\n\t\t\t\"id\": \"jogging\",\n\t\t\t\"day_of_week\": \"monday\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"easy_yoga\",\n\t\t\t\"day_of_week\": \"friday\"\n\t\t}\n\t\t\n\t]\n}"
 				},
-				"description": ""
+				"url": "{{protocol}}://{{server}}/api/users"
 			},
 			"response": []
 		},
 		{
 			"name": "Update",
 			"request": {
-				"url": "{{protocol}}://{{server}}/api/clients/HVAEiPZnTF7Fu8VMru1r",
 				"method": "PUT",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
+						"value": "application/json"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"preferences\": [\n\t\t\"typescript\",\n\t\t\"angular\"\n\t]\n}"
+					"raw": "{\n\t\"age\": 65\n}"
 				},
-				"description": ""
+				"url": "{{protocol}}://{{server}}/api/users/1Q6qbVmjTY3JPBC3z1Sr"
 			},
 			"response": []
 		},
 		{
 			"name": "Delete",
 			"request": {
-				"url": "{{protocol}}://{{server}}/api/clients/qFo8j7FQLRIJBx4XNd1S",
 				"method": "DELETE",
 				"header": [],
-				"body": {},
-				"description": ""
+				"url": "{{protocol}}://{{server}}/api/users/LZNtUnlJ3WEJQyBGWJwb"
 			},
 			"response": []
 		},
 		{
-			"name": "Simple Filter",
+			"name": "Lab",
 			"request": {
-				"url": "{{protocol}}://{{server}}/api/clients/query",
 				"method": "GET",
 				"header": [],
-				"body": {},
-				"description": ""
+				"url": "{{protocol}}://{{server}}/api/users/lab"
 			},
 			"response": []
 		},
 		{
 			"name": "Clear",
 			"request": {
-				"url": "{{protocol}}://{{server}}/api/clear",
 				"method": "GET",
 				"header": [],
-				"body": {},
-				"description": ""
+				"url": "{{protocol}}://{{server}}/api/clear"
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "38000495-7d55-4271-9b7a-4675c71ae25b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "e941f591-98c4-4472-97ea-14a8ac12b933",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }

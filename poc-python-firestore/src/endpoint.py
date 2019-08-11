@@ -4,21 +4,21 @@ import json
 
 endpoint = Blueprint('endpoint', __name__)
 
-@endpoint.route('/clients')
+@endpoint.route('/users')
 def list():
     response_data = use_case.list_all()
 
     return create_response(response_data)
 
 
-@endpoint.route('/clients/<client_id>')
-def list_one(client_id):
-    response_data = use_case.list_one(client_id)
+@endpoint.route('/users/<user_id>')
+def list_one(user_id):
+    response_data = use_case.list_one(user_id)
 
     return create_response(response_data)
 
 
-@endpoint.route('/clients', methods=['POST'])
+@endpoint.route('/users', methods=['POST'])
 def create():
     request_data = request.json
     response_data = use_case.create(request_data)
@@ -26,24 +26,24 @@ def create():
     return create_response(response_data, 201)
 
 
-@endpoint.route('/clients/<client_id>', methods=['PUT'])
-def update(client_id):
+@endpoint.route('/users/<user_id>', methods=['PUT'])
+def update(user_id):
     request_data = request.json
-    response_data = use_case.update(client_id, request_data)
+    response_data = use_case.update(user_id, request_data)
 
     return create_response(response_data)
 
 
-@endpoint.route('/clients/<client_id>', methods=['DELETE'])
-def delete(client_id):
-    response_data = use_case.delete(client_id)
+@endpoint.route('/users/<user_id>', methods=['DELETE'])
+def delete(user_id):
+    response_data = use_case.delete(user_id)
 
     return create_response(response_data)
 
 
-@endpoint.route('/clients/query')
-def query():
-    response_data = use_case.query()
+@endpoint.route('/users/lab')
+def lab():
+    response_data = use_case.lab()
 
     return create_response(response_data)
 

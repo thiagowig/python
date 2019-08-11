@@ -9,25 +9,28 @@ class UserUseCase():
         return gateway.list_all()
 
 
-    def list_one(client_id):
-        return gateway.list_one(client_id)
+    def list_one(user_id):
+        return gateway.list_one(user_id)
 
 
-    def create(client):
-        return gateway.create(client)
+    def create(user):
+        return gateway.create(user)
 
 
-    def update(client_id, client):
-        return gateway.update(client_id, client)
+    def update(user_id, user):
+        return gateway.update(user_id, user)
 
 
-    def delete(client_id):
-        return gateway.delete(client_id)
+    def delete(user_id):
+        return gateway.delete(user_id)
+
+
+    def lab():
+        return gateway.lab()
 
 
     def clear():
         return gateway.clear()
 
 
-    def query():
-        return gateway.query()
+    
