@@ -1,4 +1,7 @@
-from src.user_gateway import UserGateway as gateway
+from src.firestore_gateway import FirestoreGateway
+
+collection_name = "users"
+gateway = FirestoreGateway(collection_name)
 
 class UserUseCase():
 
@@ -26,5 +29,5 @@ class UserUseCase():
         return gateway.clear()
 
 
-    def find_by_age_greater_than(age):
-        return gateway.find_by_age_greater_than(age)
+    def query():
+        return gateway.query()

@@ -41,10 +41,9 @@ def delete(client_id):
     return create_response(response_data)
 
 
-@endpoint.route('/clients/retired')
-def retired():
-    retired_age = 65
-    response_data = use_case.find_by_age_greater_than(retired_age)
+@endpoint.route('/clients/query')
+def query():
+    response_data = use_case.query()
 
     return create_response(response_data)
 

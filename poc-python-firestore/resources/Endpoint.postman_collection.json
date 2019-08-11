@@ -1,7 +1,7 @@
 {
 	"variables": [],
 	"info": {
-		"name": "CRUD Operations",
+		"name": "Endpoint Operations",
 		"_postman_id": "28926b41-4bbb-d655-973b-a51ee7648e03",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
@@ -83,7 +83,7 @@
 		{
 			"name": "Simple Filter",
 			"request": {
-				"url": "{{protocol}}://{{server}}/api/clients/retired",
+				"url": "{{protocol}}://{{server}}/api/clients/query",
 				"method": "GET",
 				"header": [],
 				"body": {},
