@@ -1,7 +1,7 @@
 import base64
 import json
 
-def build_notification(event, context):
+def execute(event, context):
     message = decode_message(event)
 
     print(message)
