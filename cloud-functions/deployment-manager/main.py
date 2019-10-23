@@ -2,9 +2,9 @@ import base64
 import json
 
 def execute(event, context):
-    message = decode_message(event)
+    #message = decode_message(event)
 
-    print(message)
+    print(event)
 
 
 def decode_message(event):
