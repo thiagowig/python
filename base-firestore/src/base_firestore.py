@@ -23,7 +23,7 @@ class BaseFirestore:
         return document.to_dict()
 
 
-    def get_by_filters(self, filters: str):
+    def get_by_filters(self, filters):
         """Get document by filter."""
         collection = self.get_collection_ref()
 
