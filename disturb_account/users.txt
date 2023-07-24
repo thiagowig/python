@@ -1,0 +1,2 @@
+someuser@example.com
+anotheruser@example.com
