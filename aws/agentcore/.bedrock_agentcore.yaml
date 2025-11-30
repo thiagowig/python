@@ -1,0 +1,40 @@
+default_agent: fonseca_agent
+agents:
+  fonseca_agent:
+    name: fonseca_agent
+    entrypoint: fonseca_agent.py
+    platform: linux/arm64
+    container_runtime: none
+    source_path: null
+    aws:
+      execution_role: 
+      execution_role_auto_create: false
+      account: '123456789123'
+      region: us-east-1
+      ecr_repository: 
+      ecr_auto_create: false
+      network_configuration:
+        network_mode: PUBLIC
+        network_mode_config: null
+      protocol_configuration:
+        server_protocol: HTTP
+      observability:
+        enabled: true
+    bedrock_agentcore:
+      agent_id: 
+      agent_arn: 
+      agent_session_id: 
+    codebuild:
+      project_name: 
+      execution_role: 
+      source_bucket: 
+    memory:
+      mode: STM_ONLY
+      memory_id: 
+      memory_arn: 
+      memory_name: 
+      event_expiry_days: 30
+      first_invoke_memory_check_done: false
+    authorizer_configuration: null
+    request_header_configuration: null
+    oauth_configuration: null
